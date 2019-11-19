@@ -1,5 +1,5 @@
 import { useEffect } from '@tarojs/taro'
-import { useStore } from 'stook'
+import { useStore } from 'taro-stook'
 import { query } from './query'
 import { fetcher } from './fetcher'
 

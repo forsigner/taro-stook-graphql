@@ -1,6 +1,6 @@
 {
   "name": "taro-stook-graphql",
-  "version": "0.0.1",
+  "version": "0.0.3",
   "license": "MIT",
   "author": "forsigner",
   "main": "dist/index.js",
@@ -42,7 +42,6 @@
   "dependencies": {
     "graphql-tag": "^2.10.1",
     "qs": "^6.9.1",
-    "stook": "^0.1.1",
     "subscriptions-transport-ws": "^0.9.16",
     "taro-axios": "^0.7.0",
     "taro-stook": "0.0.1"
