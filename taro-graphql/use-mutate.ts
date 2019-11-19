@@ -1,8 +1,8 @@
-import { useState } from '@tarojs/taro'
+import { useState } from "@tarojs/taro";
 import { query } from './query'
 import { Options, Mutate, MutateResult, Variables } from './types'
 
-export const useMutate = <T = any>(input: string, options: Options = {}) => {
+export const useMutate = <T = any>(input: string, options?: Options) => {
   const initialState = { loading: true } as MutateResult<T>
   const [result, setState] = useState(initialState)
 
@@ -15,7 +15,7 @@ export const useMutate = <T = any>(input: string, options: Options = {}) => {
     }
   }
 
-  const mutate = (variables: Variables, opt: Options = {}): any => {
+  const mutate = (variables: Variables, opt?: Options): any => {
     setState(prev => ({ ...prev, loading: true }))
     fetchData({ ...opt, variables })
   }
