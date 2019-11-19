@@ -1,6 +1,6 @@
 {
   "name": "taro-stook-graphql",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "license": "MIT",
   "author": "forsigner",
   "main": "dist/index.js",
