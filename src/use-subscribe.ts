@@ -8,7 +8,7 @@ import { SubscribeResult, Interceptor, SubscriptionOption } from './types'
 
 export function useSubscribe<T = any>(input: string, options: SubscriptionOption<T> = {}) {
   const { interceptor: configInterceptors } = graphqlConfig
-  const { variables = {}, operationName = '', initialQuery = '' } = options
+  const { variables = {}, operationName = '', initialQuery = '', onUpdate } = options
   const fetcherName = options.key || input
 
   let unmounted = false
@@ -21,13 +21,13 @@ export function useSubscribe<T = any>(input: string, options: SubscriptionOption
   function update(updatedState: Partial<SubscribeResult<T>>) {
     const newState = { ...result, ...updatedState }
     setState(newState)
-    // onUpdate && onUpdate(newState)
+    onUpdate && onUpdate(newState)
   }
 
   const initQuery = async () => {
     if (!initialQuery) return
     try {
-      let data = await query<T>(initialQuery.query, initialQuery.variables || {})
+      let data = await query<T>(initialQuery.query, { variables: initialQuery.variables || {} })
 
       if (interceptor.responses) {
         interceptor.responses.forEach(item => {
