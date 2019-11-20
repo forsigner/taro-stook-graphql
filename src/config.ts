@@ -7,5 +7,6 @@ export let graphqlConfig = {
 
 export function config(options: GraphqlConfig) {
   clients.setupGraphqlClient(options)
+  clients.setupSubscriptionClient(options)
   graphqlConfig = { ...graphqlConfig, ...options }
 }
