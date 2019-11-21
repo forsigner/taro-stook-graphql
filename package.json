@@ -42,6 +42,6 @@
     "qs": "^6.9.1",
     "subscriptions-transport-ws": "^0.9.16",
     "taro-axios": "^0.7.0",
-    "taro-stook": "0.0.1"
+    "taro-stook": "0.0.2"
   }
 }
