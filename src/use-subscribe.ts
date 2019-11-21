@@ -29,12 +29,6 @@ export function useSubscribe<T = any>(input: string, options: SubscriptionOption
     try {
       let data = await query<T>(initialQuery.query, { variables: initialQuery.variables || {} })
 
-      if (interceptor.responses) {
-        interceptor.responses.forEach(item => {
-          data = item(data)
-        })
-      }
-
       if (!unmounted) {
         update({ loading: false, data })
       }
