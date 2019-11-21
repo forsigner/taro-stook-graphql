@@ -31,7 +31,8 @@
     "@types/jest": "^24.0.23",
     "@types/qs": "^6.9.0",
     "husky": "^3.1.0",
-    "standard-version": "^7.0.0",
+    "standard-version": "^7.0.1",
+    "taro-stook": "0.0.2",
     "tsdx": "^0.11.0",
     "tslib": "^1.10.0",
     "typescript": "^3.7.2"
@@ -41,7 +42,6 @@
     "graphql-tag": "^2.10.1",
     "qs": "^6.9.1",
     "subscriptions-transport-ws": "^0.9.16",
-    "taro-axios": "^0.7.0",
-    "taro-stook": "0.0.2"
+    "taro-axios": "^0.7.0"
   }
 }
