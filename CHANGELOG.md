@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.10](https://github.com/forsigner/taro-stook-graphql/compare/v0.0.9...v0.0.10) (2019-11-26)
+
+
+### Bug Fixes
+
+* can reset state when refetch ([7a688a9](https://github.com/forsigner/taro-stook-graphql/commit/7a688a9e8f59b4ac4c37b9576b81c6edc00eb082))
+
 ### [0.0.9](https://github.com/forsigner/taro-stook-graphql/compare/v0.0.8...v0.0.9) (2019-11-21)
 
 
