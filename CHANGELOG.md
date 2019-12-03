@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.11](https://github.com/forsigner/taro-stook-graphql/compare/v0.0.10...v0.0.11) (2019-12-03)
+
+
+### Features
+
+* support variable fn ([54d9b53](https://github.com/forsigner/taro-stook-graphql/commit/54d9b53d540d435c9f8312515326aecdf1c667d4))
+
 ### [0.0.10](https://github.com/forsigner/taro-stook-graphql/compare/v0.0.9...v0.0.10) (2019-11-26)
 
 
