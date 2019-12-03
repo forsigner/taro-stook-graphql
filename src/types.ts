@@ -8,7 +8,7 @@ export type Deps = ReadonlyArray<any>
 
 export interface Options<T = any> {
   key?: string
-  variables?: Variables
+  variables?: Variables | (() => Variables)
   deps?: Deps
   headers?: HeadersInit
   initialData?: T
@@ -68,7 +68,7 @@ export interface SubscriptionOption<T = any> {
   operationName?: string
   initialQuery?: {
     query: string
-    variables?: Variables
+    variables?: Variables | (() => Variables)
   }
   onUpdate?(result: Result<T>): any
 }
