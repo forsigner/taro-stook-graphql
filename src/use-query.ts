@@ -55,7 +55,7 @@ export function useQuery<T = any>(input: string, options: Options<T> = {}) {
 
       fetcher.get(fetcherName).called = true
       const resData = await query<T>(input, opt || {})
-      setState(state => {
+      setState((state: any) => {
         state.loading = false
         if (opt.setData && typeof opt.setData === 'function') {
           opt.setData(state.data, resData)

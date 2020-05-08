@@ -91,7 +91,7 @@ export function useSubscribe<T = any>(input: string, options: SubscriptionOption
     if (!unmounted) {
       const variablesString = JSON.stringify(variables)
       const subscription = `fetcherName_${fetcherName}variables_${variablesString}`
-      if (subscriptions.subscriptionsKeys.indexOf(subscription) >= 0) return
+      if (subscriptions.subscriptionsKeys.indexOf(subscription) >= 0) return null
       subscriptions.subscriptionsKeys.push(subscription)
       fetchData()
     }

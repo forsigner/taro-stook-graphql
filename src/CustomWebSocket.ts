@@ -9,7 +9,7 @@ export class CustomWebSocket {
   task: Taro.SocketTask
 
   set onclose(value: ((this: WebSocket, ev: CloseEvent) => any) | null) {
-    this.task.onClose(value)
+    this.task.onClose(value as any)
   }
 
   set onerror(value: any) {

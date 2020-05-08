@@ -11,7 +11,6 @@ import $$observable from 'symbol-observable'
 import { GRAPHQL_WS } from './protocol'
 import { WS_TIMEOUT } from './defaults'
 import MessageTypes from './message-types'
-import { graphqlConfig } from '../config'
 
 declare let window: any
 const _global = typeof global !== 'undefined' ? global : typeof window !== 'undefined' ? window : {}
