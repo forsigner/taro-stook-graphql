@@ -53,7 +53,7 @@ export function fromSubscription<T = any>(input: string, options: FromSubscripti
           `,
           variables,
         })
-        .subscribe(ob as any) // TODO: 
+        .subscribe(ob as any) // TODO:
     },
   }
 }

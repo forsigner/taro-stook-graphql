@@ -1,10 +1,19 @@
 import { useEffect } from '@tarojs/taro'
 import { useStore } from 'taro-stook'
 import gql from 'graphql-tag'
+import { fetcher } from './fetcher'
 import { graphqlConfig } from './config'
 import { query } from './query'
 import clients from './clients'
-import { SubscribeResult, Interceptor, SubscriptionOption } from './types'
+import { SubscribeResult, Interceptor, SubscriptionOption, QueryResult, FetcherItem } from './types'
+
+export const subscriptions = {
+  subscriptionsKeys: [] as string[],
+
+  cleanAll: () => {
+    subscriptions.subscriptionsKeys = []
+  },
+}
 
 export function useSubscribe<T = any>(input: string, options: SubscriptionOption<T> = {}) {
   const { interceptor: configInterceptors } = graphqlConfig
@@ -12,6 +21,7 @@ export function useSubscribe<T = any>(input: string, options: SubscriptionOption
   const fetcherName = options.key || input
 
   let unmounted = false
+  let unsubscribe: () => void = () => {}
   let interceptor = {} as Interceptor
   const initialState = { loading: true } as SubscribeResult<T>
   const [result, setState] = useStore(fetcherName, initialState)
@@ -23,23 +33,29 @@ export function useSubscribe<T = any>(input: string, options: SubscriptionOption
     onUpdate && onUpdate(nextState)
   }
 
+  function updateInitialQuery(nextState: QueryResult<T>) {
+    setState(nextState)
+    if (options.initialQuery && options.initialQuery.onUpdate) {
+      options.initialQuery.onUpdate(nextState)
+    }
+  }
+
   const initQuery = async () => {
     if (!initialQuery) return
     if (unmounted) return
 
     try {
       let data = await query<T>(initialQuery.query, { variables: initialQuery.variables || {} })
-      update({ loading: false, data } as SubscribeResult<T>)
+      updateInitialQuery({ loading: false, data } as QueryResult<T>)
       return data
     } catch (error) {
-      update({ loading: false, error } as SubscribeResult<T>)
+      updateInitialQuery({ loading: false, error } as QueryResult<T>)
       return error
     }
   }
 
   const fetchData = async () => {
-    if (unmounted) return
-    clients.subscriptionClient
+    const instance = clients.subscriptionClient
       .request({
         query: gql`
           ${input}
@@ -64,16 +80,25 @@ export function useSubscribe<T = any>(input: string, options: SubscriptionOption
           // console.log('completed')
         },
       })
+
+    unsubscribe = instance.unsubscribe
+    fetcher.set(fetcherName, { unsubscribe } as FetcherItem<T>)
   }
 
   useEffect(() => {
     if (initialQuery) initQuery()
 
-    fetchData()
+    if (!unmounted) {
+      const variablesString = JSON.stringify(variables)
+      const subscription = `fetcherName_${fetcherName}variables_${variablesString}`
+      if (subscriptions.subscriptionsKeys.indexOf(subscription) >= 0) return
+      subscriptions.subscriptionsKeys.push(subscription)
+      fetchData()
+    }
     return () => {
       unmounted = true
     }
   }, [])
 
-  return result
+  return { ...result, unsubscribe }
 }

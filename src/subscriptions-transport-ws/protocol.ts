@@ -1,11 +1,8 @@
-const GRAPHQL_WS = 'graphql-ws';
+const GRAPHQL_WS = 'graphql-ws'
 // NOTE: This protocol is deprecated and will be removed soon.
 /**
  * @deprecated
  */
-const GRAPHQL_SUBSCRIPTIONS = 'graphql-subscriptions';
+const GRAPHQL_SUBSCRIPTIONS = 'graphql-subscriptions'
 
-export {
-  GRAPHQL_WS,
-  GRAPHQL_SUBSCRIPTIONS,
-};
+export { GRAPHQL_WS, GRAPHQL_SUBSCRIPTIONS }

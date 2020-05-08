@@ -16,4 +16,6 @@ export interface Headers {
 export interface Options {
   endpoint: string
   headers?: Headers
+  timeout?: number
+  errRetryCount?: number
 }

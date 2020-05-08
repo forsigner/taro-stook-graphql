@@ -1,7 +1,10 @@
-import { DocumentNode, getOperationAST } from 'graphql';
+import { DocumentNode, getOperationAST } from 'graphql'
 
-export const isASubscriptionOperation = (document: DocumentNode, operationName: string): boolean => {
-  const operationAST = getOperationAST(document, operationName);
+export const isASubscriptionOperation = (
+  document: DocumentNode,
+  operationName: string,
+): boolean => {
+  const operationAST = getOperationAST(document, operationName)
 
-  return !!operationAST && operationAST.operation === 'subscription';
-};
+  return !!operationAST && operationAST.operation === 'subscription'
+}

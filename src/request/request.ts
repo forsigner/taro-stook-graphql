@@ -1,6 +1,6 @@
-import { axios } from 'taro-axios'
 import { stringify } from 'qs'
 import { Options, Body, Params } from './types'
+import { getTaro } from './getTaro'
 
 // method with json
 const methods = ['POST', 'PUT', 'PATCH', 'DELETE']
@@ -92,22 +92,35 @@ async function getErrorMsg(error: any): Promise<any> {
 export async function request<T = any>(url: string, options?: Options): Promise<T> {
   const input = getURL(url, options)
   const init = getOpt(url, options)
-  init.method
+  const timeout = options ? (options.timeout ? options.timeout : 0) : 0
+  const errRetryCount = options ? (options.errRetryCount ? options.errRetryCount : 0) : 0
 
   try {
-    const response = await axios({
+    const response = await getTaro().request({
       url: input,
       method: init.method as any,
-      headers: init.headers,
+      header: {
+        ...init.headers,
+      },
       data: init.body,
+      timeout,
     })
 
-    if (response.status >= 200 && response.status < 300) {
+    if (response.statusCode >= 200 && response.statusCode < 300) {
       return response.data
     } else {
-      throw response
+      if (response.data) {
+        throw response.data
+      } else {
+        throw response
+      }
     }
   } catch (error) {
+    if (options && errRetryCount > 0) {
+      options.errRetryCount = errRetryCount - 1
+      return request(url, options)
+    }
+
     // TODO: need to support raw response
     throw await getErrorMsg(error)
   }

@@ -42,4 +42,6 @@ export interface Options {
   referrerPolicy?: ReferrerPolicy
   signal?: AbortSignal | null
   window?: any
+  timeout?: number
+  errRetryCount?: number
 }

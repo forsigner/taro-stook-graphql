@@ -1,7 +1,3 @@
-declare let window: any
-const _global = typeof global !== 'undefined' ? global : typeof window !== 'undefined' ? window : {}
-const NativeWebSocket = _global.WebSocket || _global.MozWebSocket
-
 import Backoff from 'backo2'
 import { default as EventEmitterType, EventEmitter, ListenerFn } from 'eventemitter3'
 import isString from './utils/is-string'
@@ -15,6 +11,11 @@ import $$observable from 'symbol-observable'
 import { GRAPHQL_WS } from './protocol'
 import { WS_TIMEOUT } from './defaults'
 import MessageTypes from './message-types'
+import { graphqlConfig } from '../config'
+
+declare let window: any
+const _global = typeof global !== 'undefined' ? global : typeof window !== 'undefined' ? window : {}
+const NativeWebSocket = _global.WebSocket || _global.MozWebSocket
 
 const NULL_AS: any = null
 
@@ -570,7 +571,6 @@ export class SubscriptionClient {
 
   private connect() {
     this.client = new this.wsImpl(this.url, this.wsProtocols)
-
     this.checkMaxConnectTimeout()
     setTimeout(() => {
       this.client.onopen = async () => {
